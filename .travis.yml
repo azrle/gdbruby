@@ -3,8 +3,13 @@ language: ruby
 rvm:
   - "2.0.0"
 
+mono:
+  - latest
+
 before_install:
   - sudo apt-get -qq update
   - sudo apt-get -qq install gdb
 
-script: bundle exec rspec spec
+script:
+  - sudo sysctl kernel.yama.ptrace_scope=0
+  - bundle exec rspec spec
